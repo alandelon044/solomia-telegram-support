@@ -1,0 +1,56 @@
+{
+  "name": "SOLOMIA — Error Alerts",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "7688a713-ccc2-5916-ae29-5acef081720d",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_ADMIN_CHAT_ID",
+        "text": "={{ [($json.execution?.mode === 'manual' ? '🧪 ТЕСТ — ' : '') + '🚨 SOLOMIA: выполнение остановилось с ошибкой', '', 'Схема: ' + ($json.workflow?.name ?? 'SOLOMIA — Telegram Support Tickets'), 'Шаг: ' + ($json.execution?.lastNodeExecuted ?? $json.trigger?.error?.node?.name ?? 'Запуск схемы'), 'Выполнение: ' + ($json.execution?.id ? '#' + $json.execution.id : 'ошибка запуска'), '', 'Открыть: ' + ($json.execution?.url ?? 'https://YOUR_N8N_HOST/workflow/' + ($json.workflow?.id ?? 'YOUR_SUPPORT_WORKFLOW_ID') + '/executions'), '', 'Проверьте журнал n8n перед повторным запуском, чтобы не отправить клиенту ответ дважды.'].join(String.fromCharCode(10)).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "3d6aafe4-f99e-540f-9352-791d5d857329",
+      "name": "Notify owner in Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        288,
+        0
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 3000
+    }
+  ],
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Notify owner in Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "pinData": {}
+}
