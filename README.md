@@ -38,7 +38,7 @@ The prompt uses six categories: `product_info`, `authenticity`, `order_status`, 
 - Added and tested a separate failure-notification workflow.
 - Ran manual smoke tests, inspected execution records, and documented both results and remaining gaps.
 
-The implementation and documentation were developed with OpenAI Codex assistance. Gemini generates the draft content. This is an AI-assisted portfolio project, with no claim of measured business savings or production uptime.
+The implementation and documentation were developed with AI assistance. Gemini generates the draft content. This is an AI-assisted portfolio project, with no claim of measured business savings or production uptime.
 
 ## Evidence you can inspect without signing in
 
